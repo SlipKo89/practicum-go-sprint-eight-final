@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"math/rand"
 	"testing"
 	"time"
@@ -177,6 +178,7 @@ func TestGetByClient(t *testing.T) {
 		for _, value := range parcelMap {
 			if value == parcel {
 				temp_value = value
+				fmt.Println(value, parcel)
 			}
 		}
 		assert.Equal(t, temp_value, parcel)
