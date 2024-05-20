@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 	"math/rand"
 	"testing"
 	"time"
@@ -65,7 +64,8 @@ func TestAddGetDelete(t *testing.T) {
 	require.NoError(t, err)
 	// проверьте, что посылку больше нельзя получить из БД
 	_, err = store.Get(id)
-	require.Equal(t, sql.ErrNoRows, err)
+	//require.Equal(t, sql.ErrNoRows, err)
+	assert.ErrorIs(t, sql.ErrNoRows, err)
 }
 
 // TestSetAddress проверяет обновление адреса
@@ -176,13 +176,12 @@ func TestGetByClient(t *testing.T) {
 		// убедитесь, что все посылки из storedParcels есть в parcelMap
 		temp_value := Parcel{}
 		for _, value := range parcelMap {
+			//fmt.Println(value, parcel)
 			if value == parcel {
 				temp_value = value
-				fmt.Println(value, parcel)
 			}
 		}
 		assert.Equal(t, temp_value, parcel)
 		// убедитесь, что значения полей полученных посылок заполнены верно
-
 	}
 }
